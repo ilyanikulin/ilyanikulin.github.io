@@ -17,5 +17,11 @@
   "plugins": [
     "react",
     "@typescript-eslint"
-  ]
+  ],
+  "rules": {
+    "react/function-component-definition": 0,
+    "react/no-unstable-nested-components": 0,
+    "react/jsx-props-no-spreading": 0,
+    "import/prefer-default-export": 0
+  }
 }

@@ -1,0 +1,35 @@
+@use './src/assets/variables' as *;
+
+.form-page {
+  display: flex;
+
+  & > div {
+    flex: 1;
+
+    &:first-child {
+      border-right: 1px solid $grey;
+    }
+
+    &:last-child {
+      padding-left: 56px;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__field {
+    margin-bottom: 15px;
+  }
+
+  &__result {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__result-field {
+    margin-bottom: 15px;
+  }
+}

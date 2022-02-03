@@ -1,0 +1,54 @@
+@use './src/assets/variables' as *;
+
+.button {
+  font-size: 14px;
+  min-width: 120px;
+  width: max-content;
+  min-height: 46px;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 26px;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  color: $white;
+  border-radius: 2px;
+  border: 1px solid transparent;
+
+  margin: 10px;
+
+  & {
+    color: $white;
+    background: $blue;
+
+    &:not(&--primary) {
+      background: #fff;
+      color: $blue;
+      border-color: $blue;
+    }
+  }
+
+  &:disabled {
+    background: $light-grey;
+    color: $grey;
+  }
+
+  &:disabled:not(&--primary) {
+    background: #fff;
+    color: $grey;
+    border-color: $light-grey;
+  }
+
+  &--primary {
+    border: none;
+  }
+
+  & span {
+    height: max-content;
+    text-decoration: none;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+}

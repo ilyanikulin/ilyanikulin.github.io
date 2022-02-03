@@ -1,28 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import './App.css';
+import EditorPage from './pages/Editor';
+import FormPage from './pages/Form';
+import JsonProvide from './contexts/json';
+import Menu from './components/menu';
+
+import { ROUTE } from './constans/routes';
+
+import './App.scss';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.tsx</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <JsonProvide>
+      <BrowserRouter>
+        <Menu routes={[
+          {
+            label: 'Editor',
+            path: ROUTE.EDITOR,
+          },
+          {
+            label: 'Form',
+            path: ROUTE.FORM,
+          },
+        ]}
+        />
+        <div className="page-content">
+          <Switch>
+            <Route path={ROUTE.EDITOR} component={EditorPage} />
+            <Route path={ROUTE.FORM} component={FormPage} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    </JsonProvide>
   );
 }
 
