@@ -48,7 +48,6 @@ const FormPage: React.FC = () => {
             ))}
           </div>
         </form>
-
       </div>
 
       <div className="form-page__col form-page__col--result">
