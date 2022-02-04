@@ -18,4 +18,5 @@ export type CommonBaseInputProps = {
   value?: InputValue;
   onChange?: (val: any) => void;
   id?: string;
+  errorMessage?: string;
 };

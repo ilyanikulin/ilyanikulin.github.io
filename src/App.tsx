@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter, Redirect, Route, Switch,
+} from 'react-router-dom';
 
 import EditorPage from './pages/Editor';
 import FormPage from './pages/Form';
@@ -16,7 +18,7 @@ function App() {
       <BrowserRouter>
         <Menu routes={[
           {
-            label: 'Editor',
+            label: 'Config',
             path: ROUTE.EDITOR,
           },
           {
@@ -28,6 +30,9 @@ function App() {
         <div className="page-content">
           <Switch>
             <Route path={ROUTE.EDITOR} component={EditorPage} />
+            <Route exact path="/">
+              <Redirect to={ROUTE.EDITOR} />
+            </Route>
             <Route path={ROUTE.FORM} component={FormPage} />
           </Switch>
         </div>

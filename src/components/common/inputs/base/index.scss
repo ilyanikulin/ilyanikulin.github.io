@@ -16,7 +16,6 @@
 }
 
 .input {
-
   &--hidden {
     height: 0;
     //opacity: 0;
@@ -47,6 +46,10 @@
     }
   }
 
+  &__container {
+    position: relative;
+  }
+
   &__native {
     color: $black;
     font-family: Arial;
@@ -75,5 +78,13 @@
   &__required {
     color: $red;
     margin-left: 2px;
+  }
+
+  &__error {
+    font-size: 14px;
+    color: $red;
+    position: absolute;
+    bottom: -20px;
+    white-space: nowrap;
   }
 }

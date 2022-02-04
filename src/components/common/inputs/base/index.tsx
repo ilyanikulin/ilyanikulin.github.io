@@ -23,6 +23,7 @@ const BaseInput = React.forwardRef(
       required,
       id,
       checked,
+      errorMessage,
     }: BaseInputProps,
     ref: ForwardedRef<HTMLDivElement>,
   ): JSX.Element => {
@@ -88,9 +89,10 @@ const BaseInput = React.forwardRef(
                 },
               })
             )}
+
+            {errorMessage && <span className={b('error')}>{errorMessage}</span>}
           </div>
         </label>
-
       </div>
     );
   },

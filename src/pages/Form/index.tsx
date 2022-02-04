@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { renderField } from './helpers';
+import { renderField, validationForm } from './helpers';
 import { JsonContext } from '../../contexts/json';
 
 import './index.scss';
@@ -8,11 +8,17 @@ const FormPage: React.FC = () => {
   const [config] = useContext(JsonContext);
   const [savedData, setSavedData] = useState<Record<string, string | number>>({});
   const [formData, setFormData] = useState<Record<string, string | number>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSavedData(formData);
+    const { success, errors: nextErrors } = validationForm(config, formData);
+    if (success) {
+      setSavedData(formData);
+    }
+    setErrors(nextErrors);
   };
+
   const onChange = (name: string, value: string | number) => {
     setFormData((prev) => ({
       ...prev,
@@ -23,10 +29,10 @@ const FormPage: React.FC = () => {
   return (
     <div className="form-page">
       <div>
-        <form onSubmit={onSubmit} className="form-page__form">
+        <form onSubmit={onSubmit} className="form-page__form" noValidate>
           {Array.isArray(config) && config.map((conf) => renderField(conf, (val) => {
             if ('name' in conf) onChange(conf.name, val);
-          }))}
+          }, errors))}
         </form>
       </div>
 
