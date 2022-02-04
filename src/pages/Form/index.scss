@@ -2,31 +2,36 @@
 
 .form-page {
   display: flex;
+  height: 100%;
 
   & > div {
     flex: 1;
-
-    &:first-child {
-      border-right: 1px solid $grey;
-    }
 
     &:last-child {
       padding-left: 56px;
     }
   }
 
-  &__form {
+  &__form, &__preview {
     display: flex;
     flex-direction: column;
+    border: 1px solid $light-grey;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  &__preview {
+    padding: 25px;
+  }
+
+  &__fields {
+    padding: 25px;
   }
 
   &__field {
     max-width: 200px;
     margin-bottom: 25px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid $light-grey;
   }
-
   &__result {
     display: flex;
     flex-direction: column;
@@ -38,5 +43,16 @@
 
   &__button {
     margin-left: auto;
+  }
+  &__buttons {
+    margin-top: auto;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid $light-grey;
+    background: $white;
+    display: flex;
+    justify-content: end;
+    flex-wrap: wrap;
   }
 }

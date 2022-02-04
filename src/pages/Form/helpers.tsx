@@ -1,7 +1,7 @@
 import React from 'react';
 import RadioInput from 'src/components/common/inputs/radio';
-import Button from 'src/components/common/button';
-import { Config } from 'src/types/config';
+// import Button from 'src/components/common/button';
+import { FieldsType } from 'src/types/config';
 import BaseInput from 'src/components/common/inputs/base';
 import { BaseInputProps } from 'src/components/common/inputs/base/types';
 
@@ -9,39 +9,37 @@ export type FormValue = Record<string, string | number | boolean>;
 
 const REQUIRED_FIELD = 'This field is required';
 
-export const renderField = (config: Config, onChange: BaseInputProps['onChange'], errors: Record<string, string>) => {
+export const renderField = (field: FieldsType, onChange: BaseInputProps['onChange'], errors: Record<string, string>) => {
   if (
-    config.type === 'text'
-    || config.type === 'number'
-    || config.type === 'checkbox'
-    || config.type === 'textarea'
-    || config.type === 'date'
+    field.type === 'text'
+    || field.type === 'number'
+    || field.type === 'checkbox'
+    || field.type === 'textarea'
+    || field.type === 'date'
   ) {
     return (
       <BaseInput
         className="form-page__field"
-        key={config.name}
-        {...config}
-        value={config.defaultValue}
+        key={field.name}
+        {...field}
+        // value={field.defaultValue}
         onChange={onChange}
-        checked={(config.type === 'checkbox' && !!config.defaultValue) || false}
-        errorMessage={errors[config.name]}
+        checked={(field.type === 'checkbox' && !!field.defaultValue) || false}
+        errorMessage={errors[field.name]}
       />
     );
   }
-  if (config.type === 'radio') {
+  if (field.type === 'radio') {
     return (
       <RadioInput
-        {...config}
+        {...field}
         className="form-page__field"
-        key={config.name}
-        value={config.defaultValue}
+        key={field.name}
+        value={field.defaultValue}
         onChange={onChange}
-        errorMessage={errors[config.name]}
+        errorMessage={errors[field.name]}
       />
     );
-  } if (config.type === 'button') {
-    return <Button {...config} key={config.label.replaceAll(' ', '_')} className="form-page__button" />;
   }
   return null;
 };
@@ -52,10 +50,10 @@ type ValidResult = {
 };
 
 export const validationForm = (
-  configs: Config[],
+  fields: FieldsType[],
   formDate: FormValue,
 ): ValidResult => {
-  const errors = configs.reduce((acc, config) => {
+  const errors = fields.reduce((acc, config) => {
     if ('required' in config && config.required && !formDate[config.name]) {
       acc[config.name] = REQUIRED_FIELD;
     }
@@ -69,11 +67,11 @@ export const validationForm = (
 };
 
 export const getInitialValues = (
-  configs: Config[],
+  fields: FieldsType[],
 ): Record<string, string | number | boolean> => (
-  configs.reduce((acc, config) => {
-    if ('defaultValue' in config && config.defaultValue) {
-      acc[config.name] = config.defaultValue;
+  fields.reduce((acc, field) => {
+    if ('defaultValue' in field && field.defaultValue) {
+      acc[field.name] = field.defaultValue;
     }
     return acc;
   }, {} as Record<string, string | number | boolean>)

@@ -2,11 +2,14 @@
 
 .menu {
   display: flex;
-  width: 100%;
   padding: 15px 56px;
   font-size: 24px;
   font-weight: bold;
   border-bottom: 1px solid $light-grey;
+  position: sticky;
+  top: 0;
+  background: $white;
+  z-index: 1000;
 
   &__link {
     text-decoration: none;

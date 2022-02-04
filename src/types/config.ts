@@ -41,6 +41,12 @@ export type FormButton = {
   primary?: boolean;
 };
 
-export type Config = Radio | Checkbox |
+export type FieldsType = Radio | Checkbox |
 DateField | NumberField | TextField |
-TextareaField | FormButton;
+TextareaField;
+
+export type Config = {
+  title?: string;
+  items: FieldsType[];
+  buttons: FormButton[];
+};

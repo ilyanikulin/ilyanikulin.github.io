@@ -3,9 +3,9 @@ import {
   BrowserRouter, Redirect, Route, Switch,
 } from 'react-router-dom';
 
+import JsonProvide from 'src/contexts/config';
 import EditorPage from './pages/Editor';
 import FormPage from './pages/Form';
-import JsonProvide from './contexts/json';
 import Menu from './components/menu';
 
 import { ROUTE } from './constans/routes';

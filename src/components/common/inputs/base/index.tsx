@@ -11,7 +11,7 @@ const b = bem('input');
 const getInitialValue = (value: InputValue, type: string) => {
   switch (type) {
     case 'date':
-      return typeof value === 'string' ? new Date(value).toISOString().substring(0, 10) : value;
+      return (value && typeof value === 'string') ? new Date(value).toISOString().substring(0, 10) : value;
     default:
       return value?.toString();
   }
@@ -37,7 +37,7 @@ const BaseInput = React.forwardRef(
     ref: ForwardedRef<HTMLDivElement>,
   ): JSX.Element => {
     const [localValue, setLocalValue] = useState<InputValue>(getInitialValue(value, type));
-    const [localChecked, setLocalChecked] = useState<boolean>(checked || false);
+    const [checkboxValue, setCheckboxValue] = useState<boolean>(checked || false);
 
     const setValue = (nextValue: InputValue) => {
       if (onChange) {
@@ -45,7 +45,7 @@ const BaseInput = React.forwardRef(
       }
       setLocalValue(nextValue);
       if (type === 'checkbox') {
-        setLocalChecked(!!nextValue);
+        setCheckboxValue(!!nextValue);
       }
     };
 
@@ -94,9 +94,9 @@ const BaseInput = React.forwardRef(
             ) : (
               React.createElement(type === 'textarea' ? 'textarea' : 'input', {
                 ...nativeInputProps,
-                checked: localChecked,
+                checked: type === 'checkbox' ? checkboxValue : checked,
                 onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  nativeInputProps.onChange(type === 'checkbox' ? `${e.target.checked}` : e.target.value);
+                  nativeInputProps.onChange(type === 'checkbox' ? e.target.checked : e.target.value);
                 },
               })
             )}
@@ -109,4 +109,4 @@ const BaseInput = React.forwardRef(
   },
 );
 
-export default BaseInput;
+export default React.memo(BaseInput);
