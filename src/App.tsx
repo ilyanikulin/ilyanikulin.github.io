@@ -22,7 +22,7 @@ function App() {
             path: ROUTE.EDITOR,
           },
           {
-            label: 'Form',
+            label: 'Result',
             path: ROUTE.FORM,
           },
         ]}
