@@ -18,9 +18,10 @@ const RadioInput: React.FC<RadioInputProps> = ({
   required,
   name,
   onChange,
+  value,
   ...props
 }) => {
-  const [localValue, setLocalValue] = useState<string>();
+  const [localValue, setLocalValue] = useState<string>(value?.toString() || '');
 
   const onChangeHandler = (val: string) => {
     if (onChange) {
@@ -35,7 +36,7 @@ const RadioInput: React.FC<RadioInputProps> = ({
       type="custom"
       name={name}
       required={required}
-      CustomInput={(inputProps) => (
+      render={(inputProps) => (
         <fieldset name={name} className="radio__fieldset">
           {options.map((opt) => (
             <BaseInput

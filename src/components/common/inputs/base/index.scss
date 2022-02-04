@@ -61,6 +61,11 @@
       outline: none;
       width: 100%;
       max-width: 200px;
+      padding: 1px 2px;
+    }
+
+    &--textarea {
+      min-height: 130px;
     }
 
     &--checkbox:not(&--custom) {

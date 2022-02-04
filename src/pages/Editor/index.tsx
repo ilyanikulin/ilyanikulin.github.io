@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
-import { JsonContext } from '../../contexts/json';
-import JsonEditor, { JsonEditorProps } from '../../components/json-editor';
+import { JsonContext } from 'src/contexts/json';
+import JsonEditor, { JsonEditorProps } from 'src/components/json-editor';
 
 const EditorPage: React.FC = () => {
   const [config, setConfig] = useContext(JsonContext);

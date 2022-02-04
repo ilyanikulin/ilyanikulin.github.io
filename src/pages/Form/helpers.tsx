@@ -1,9 +1,11 @@
 import React from 'react';
-import RadioInput from '../../components/common/inputs/radio';
-import Button from '../../components/common/button';
-import { Config } from '../../types/config';
-import BaseInput from '../../components/common/inputs/base';
-import { BaseInputProps } from '../../components/common/inputs/base/types';
+import RadioInput from 'src/components/common/inputs/radio';
+import Button from 'src/components/common/button';
+import { Config } from 'src/types/config';
+import BaseInput from 'src/components/common/inputs/base';
+import { BaseInputProps } from 'src/components/common/inputs/base/types';
+
+export type FormValue = Record<string, string | number | boolean>;
 
 const REQUIRED_FIELD = 'This field is required';
 
@@ -20,7 +22,9 @@ export const renderField = (config: Config, onChange: BaseInputProps['onChange']
         className="form-page__field"
         key={config.name}
         {...config}
+        value={config.defaultValue}
         onChange={onChange}
+        checked={(config.type === 'checkbox' && !!config.defaultValue) || false}
         errorMessage={errors[config.name]}
       />
     );
@@ -31,6 +35,7 @@ export const renderField = (config: Config, onChange: BaseInputProps['onChange']
         {...config}
         className="form-page__field"
         key={config.name}
+        value={config.defaultValue}
         onChange={onChange}
         errorMessage={errors[config.name]}
       />
@@ -48,7 +53,7 @@ type ValidResult = {
 
 export const validationForm = (
   configs: Config[],
-  formDate: Record<string, string | number>,
+  formDate: FormValue,
 ): ValidResult => {
   const errors = configs.reduce((acc, config) => {
     if ('required' in config && config.required && !formDate[config.name]) {
@@ -62,3 +67,14 @@ export const validationForm = (
     errors,
   };
 };
+
+export const getInitialValues = (
+  configs: Config[],
+): Record<string, string | number | boolean> => (
+  configs.reduce((acc, config) => {
+    if ('defaultValue' in config && config.defaultValue) {
+      acc[config.name] = config.defaultValue;
+    }
+    return acc;
+  }, {} as Record<string, string | number | boolean>)
+);

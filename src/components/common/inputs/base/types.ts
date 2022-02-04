@@ -1,9 +1,9 @@
 import React from 'react';
 
-export type InputValue = string | number | Date;
+export type InputValue = string | number | boolean | Date;
 
 export type BaseInputProps = CommonBaseInputProps & {
-  CustomInput?: React.FC<{ className?: string }>;
+  render?: React.FC<CommonBaseInputProps>;
   type?: string;
   checked?: boolean;
 };

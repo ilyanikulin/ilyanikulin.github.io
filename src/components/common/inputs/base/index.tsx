@@ -8,6 +8,15 @@ import './index.scss';
 
 const b = bem('input');
 
+const getInitialValue = (value: InputValue, type: string) => {
+  switch (type) {
+    case 'date':
+      return typeof value === 'string' ? new Date(value).toISOString().substring(0, 10) : value;
+    default:
+      return value?.toString();
+  }
+};
+
 const BaseInput = React.forwardRef(
   (
     {
@@ -19,7 +28,7 @@ const BaseInput = React.forwardRef(
       label,
       onChange,
       type = 'text',
-      CustomInput,
+      render,
       required,
       id,
       checked,
@@ -27,15 +36,17 @@ const BaseInput = React.forwardRef(
     }: BaseInputProps,
     ref: ForwardedRef<HTMLDivElement>,
   ): JSX.Element => {
-    const [localValue, setLocalValue] = useState<InputValue>(
-      value?.toString(),
-    );
+    const [localValue, setLocalValue] = useState<InputValue>(getInitialValue(value, type));
+    const [localChecked, setLocalChecked] = useState<boolean>(checked || false);
 
     const setValue = (nextValue: InputValue) => {
       if (onChange) {
         onChange(nextValue);
       }
       setLocalValue(nextValue);
+      if (type === 'checkbox') {
+        setLocalChecked(!!nextValue);
+      }
     };
 
     const nativeInputProps = {
@@ -78,12 +89,12 @@ const BaseInput = React.forwardRef(
               b('container', { disabled }),
             )}
           >
-            {CustomInput ? (
-              <CustomInput {...nativeInputProps} />
+            {render ? (
+              render(nativeInputProps)
             ) : (
               React.createElement(type === 'textarea' ? 'textarea' : 'input', {
                 ...nativeInputProps,
-                checked,
+                checked: localChecked,
                 onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
                   nativeInputProps.onChange(type === 'checkbox' ? `${e.target.checked}` : e.target.value);
                 },

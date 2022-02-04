@@ -1,4 +1,4 @@
-import { RadioOption } from '../components/common/inputs/radio';
+import { RadioOption } from 'src/components/common/inputs/radio';
 
 type BaseProps = {
   label?: string;
@@ -6,6 +6,7 @@ type BaseProps = {
   name: string;
   placeholder?: string;
   disabled?: boolean;
+  defaultValue?: string | number | boolean;
 };
 
 export type NumberField = BaseProps & {

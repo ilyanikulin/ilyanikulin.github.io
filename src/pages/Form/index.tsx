@@ -1,13 +1,16 @@
 import React, { useContext, useState } from 'react';
-import { renderField, validationForm } from './helpers';
-import { JsonContext } from '../../contexts/json';
+import { JsonContext } from 'src/contexts/json';
+
+import {
+  FormValue, getInitialValues, renderField, validationForm,
+} from './helpers';
 
 import './index.scss';
 
 const FormPage: React.FC = () => {
   const [config] = useContext(JsonContext);
-  const [savedData, setSavedData] = useState<Record<string, string | number>>({});
-  const [formData, setFormData] = useState<Record<string, string | number>>({});
+  const [savedData, setSavedData] = useState<FormValue>({});
+  const [formData, setFormData] = useState<FormValue>(getInitialValues(config));
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const onSubmit = (e: React.FormEvent) => {
@@ -38,7 +41,7 @@ const FormPage: React.FC = () => {
 
       <div className="form-page__result">
         {Object.entries(savedData).map(([key, value]) => (
-          <span className="form-page__result-field" key={key}>{`${key}: ${value.toString()}`}</span>
+          !!value.toString() && <span className="form-page__result-field" key={key}>{`${key}: ${value.toString()}`}</span>
         ))}
       </div>
     </div>

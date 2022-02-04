@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Config } from '../types/config';
+import { Config } from 'src/types/config';
 
 export type JsonContextValue = Config[];
 
@@ -10,6 +10,7 @@ const EXAMPLE: JsonContextValue = [
     type: 'checkbox',
     label: 'checkbox',
     required: true,
+    defaultValue: true,
     name: 'checkbox',
   },
   {
@@ -32,6 +33,7 @@ const EXAMPLE: JsonContextValue = [
     type: 'date',
     label: 'date',
     required: true,
+    defaultValue: '2022-02-04T12:13:25.679Z',
     name: 'date',
     placeholder: 'Enter value',
   },
