@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioInput from 'src/components/common/inputs/radio';
+import RadioInput from 'src/components/common/inputs/radio-group';
 // import Button from 'src/components/common/button';
 import { FieldsType } from 'src/types/config';
 import BaseInput from 'src/components/common/inputs/base';

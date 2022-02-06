@@ -1,10 +1,7 @@
-import React from 'react';
-
 export type InputValue = string | number | boolean | Date;
 
 export type BaseInputProps = CommonBaseInputProps & {
-  render?: React.FC<CommonBaseInputProps>;
-  type?: string;
+  type?: 'text' | 'textarea' | 'number' | 'date' | 'checkbox' | 'radio';
   checked?: boolean;
 };
 

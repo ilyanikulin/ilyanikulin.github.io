@@ -1,4 +1,4 @@
-import { RadioOption } from 'src/components/common/inputs/radio';
+import { RadioOption } from 'src/components/common/inputs/radio-group';
 
 type BaseProps = {
   label?: string;

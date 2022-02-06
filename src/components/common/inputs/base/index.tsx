@@ -28,7 +28,6 @@ const BaseInput = React.forwardRef(
       label,
       onChange,
       type = 'text',
-      render,
       required,
       id,
       checked,
@@ -60,9 +59,13 @@ const BaseInput = React.forwardRef(
       ),
       id: id || name,
       disabled,
-      onChange: setValue,
-      value: localValue,
       required,
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(type === 'checkbox' ? e.target.checked : e.target.value);
+      },
+
+      checked: type === 'checkbox' ? checkboxValue : checked,
+      value: localValue,
     };
 
     return (
@@ -89,17 +92,9 @@ const BaseInput = React.forwardRef(
               b('container', { disabled }),
             )}
           >
-            {render ? (
-              render(nativeInputProps)
-            ) : (
-              React.createElement(type === 'textarea' ? 'textarea' : 'input', {
-                ...nativeInputProps,
-                checked: type === 'checkbox' ? checkboxValue : checked,
-                onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
-                  nativeInputProps.onChange(type === 'checkbox' ? e.target.checked : e.target.value);
-                },
-              })
-            )}
+            {React.createElement(type === 'textarea' ? 'textarea' : 'input', {
+              ...nativeInputProps,
+            })}
 
             {errorMessage && <span className={b('error')}>{errorMessage}</span>}
           </div>
