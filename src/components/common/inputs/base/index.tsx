@@ -1,4 +1,4 @@
-import React, { ForwardedRef, useState } from 'react';
+import React, { ForwardedRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import bem from 'bem-ts';
 
@@ -37,6 +37,24 @@ const BaseInput = React.forwardRef(
   ): JSX.Element => {
     const [localValue, setLocalValue] = useState<InputValue>(getInitialValue(value, type));
     const [checkboxValue, setCheckboxValue] = useState<boolean>(checked || false);
+
+    useEffect(() => {
+      setLocalValue((prev) => {
+        if (getInitialValue(value, type) !== prev) {
+          return getInitialValue(value, type);
+        }
+        return prev;
+      });
+    }, [value]);
+
+    useEffect(() => {
+      setCheckboxValue((prev) => {
+        if (checked !== prev) {
+          return checked || false;
+        }
+        return prev;
+      });
+    }, [value]);
 
     const setValue = (nextValue: InputValue) => {
       if (onChange) {

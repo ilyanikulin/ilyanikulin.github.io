@@ -34,12 +34,15 @@ export type Radio = BaseProps & {
   options: RadioOption[]
 };
 
+export type Action = 'reset' | 'demoAction';
+
 export type FormButton = {
   type: 'button';
-  submit?: boolean;
   label: string;
   primary?: boolean;
-};
+} & (
+  { submit: true } | { action: Action }
+);
 
 export type FieldsType = Radio | Checkbox |
 DateField | NumberField | TextField |

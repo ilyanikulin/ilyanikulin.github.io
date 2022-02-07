@@ -9,7 +9,12 @@ export type FormValue = Record<string, string | number | boolean>;
 
 const REQUIRED_FIELD = 'This field is required';
 
-export const renderField = (field: FieldsType, onChange: BaseInputProps['onChange'], errors: Record<string, string>) => {
+export const renderField = (
+  field: FieldsType,
+  onChange: BaseInputProps['onChange'],
+  value: string | boolean | number,
+  errors: Record<string, string>,
+) => {
   if (
     field.type === 'text'
     || field.type === 'number'
@@ -22,9 +27,9 @@ export const renderField = (field: FieldsType, onChange: BaseInputProps['onChang
         className="form-page__field"
         key={field.name}
         {...field}
-        // value={field.defaultValue}
+        value={value}
         onChange={onChange}
-        checked={(field.type === 'checkbox' && !!field.defaultValue) || false}
+        checked={(field.type === 'checkbox' && !!value) || false}
         errorMessage={errors[field.name]}
       />
     );
@@ -35,7 +40,7 @@ export const renderField = (field: FieldsType, onChange: BaseInputProps['onChang
         {...field}
         className="form-page__field"
         key={field.name}
-        value={field.defaultValue}
+        value={value}
         onChange={onChange}
         errorMessage={errors[field.name]}
       />

@@ -61,5 +61,11 @@ export const CONFIG_EXAMPLE: Config = {
       label: 'Send',
       submit: true,
     },
+    {
+      type: 'button',
+      label: 'Reset',
+      primary: false,
+      action: 'reset',
+    },
   ],
 };

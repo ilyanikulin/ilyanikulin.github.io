@@ -31,6 +31,22 @@ const FormPage: React.FC = () => {
     }));
   };
 
+  const resetForm = () => {
+    setErrors({});
+    setFormData({});
+    setSavedData({});
+  };
+
+  /**
+   * It's mapping of actions for buttons
+   */
+  const actions = {
+    reset: resetForm,
+    demoAction: () => {
+      setSavedData({ 'demo-action': 'called demoAction' });
+    },
+  };
+
   return (
     <div className="form-page">
       <div className="form-page__col">
@@ -39,13 +55,19 @@ const FormPage: React.FC = () => {
           <div className="form-page__fields">
             {Array.isArray(config.items) && config.items.map((conf) => renderField(conf, (val) => {
               onChange(conf.name, val);
-            }, errors))}
+            }, formData[conf.name], errors))}
           </div>
 
           <div className="form-page__buttons">
-            {Array.isArray(config.buttons) && config.buttons.map((button) => (
-              <Button key={button.label.replaceAll(' ', '_')} {...button} />
-            ))}
+            {Array.isArray(config.buttons) && config.buttons
+              .filter((btn) => 'submit' in btn || Object.keys(actions).includes(btn.action))
+              .map((button) => (
+                <Button
+                  key={button.label.replaceAll(' ', '_')}
+                  {...button}
+                  onClick={'action' in button ? actions[button.action] : undefined}
+                />
+              ))}
           </div>
         </form>
       </div>
