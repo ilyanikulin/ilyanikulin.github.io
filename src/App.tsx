@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  BrowserRouter, Redirect, Route, Switch,
+  HashRouter, Redirect, Route, Switch,
 } from 'react-router-dom';
 
 import JsonProvide from 'src/contexts/config';
@@ -15,7 +15,7 @@ import './App.scss';
 function App() {
   return (
     <JsonProvide>
-      <BrowserRouter>
+      <HashRouter>
         <Menu routes={[
           {
             label: 'Config',
@@ -36,7 +36,7 @@ function App() {
             <Route path={ROUTE.FORM} component={FormPage} />
           </Switch>
         </div>
-      </BrowserRouter>
+      </HashRouter>
     </JsonProvide>
   );
 }

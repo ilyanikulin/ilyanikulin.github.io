@@ -1,5 +1,7 @@
 # Dynamic form by JSON config
 
+demo: https://ilyanikulin.github.io/json-form/
+
 This small project has two tabs.
 - Config (There are json editor for config form)
 - Result (There are form by JSON config from first tab and preview form data witch can you see after submitting form)
