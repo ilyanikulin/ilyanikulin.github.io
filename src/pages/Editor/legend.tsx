@@ -6,7 +6,7 @@ const EditorLegend: React.FC = () => (
     <h3>Legend</h3>
     <h4>Allow actions of buttons:</h4>
     {Object.keys(actions).map((action) => (
-      <div>{action}</div>
+      <div key={action}>{action}</div>
     ))}
 
   </div>
