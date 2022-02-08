@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  HashRouter, Redirect, Route, Switch,
+  BrowserRouter, Redirect, Route, Switch,
 } from 'react-router-dom';
 
 import JsonProvide from 'src/contexts/config';
@@ -8,14 +8,14 @@ import EditorPage from './pages/Editor';
 import FormPage from './pages/Form';
 import Menu from './components/menu';
 
-import { ROUTE } from './constans/routes';
+import { BASE_PATH, ROUTE } from './constans/routes';
 
 import './App.scss';
 
 function App() {
   return (
     <JsonProvide>
-      <HashRouter>
+      <BrowserRouter basename={BASE_PATH}>
         <Menu routes={[
           {
             label: 'Config',
@@ -29,14 +29,14 @@ function App() {
         />
         <div className="page-content">
           <Switch>
-            <Route path={ROUTE.EDITOR} component={EditorPage} />
             <Route exact path="/">
               <Redirect to={ROUTE.EDITOR} />
             </Route>
+            <Route path={ROUTE.EDITOR} component={EditorPage} />
             <Route path={ROUTE.FORM} component={FormPage} />
           </Switch>
         </div>
-      </HashRouter>
+      </BrowserRouter>
     </JsonProvide>
   );
 }

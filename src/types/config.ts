@@ -34,14 +34,19 @@ export type Radio = BaseProps & {
   options: RadioOption[]
 };
 
-export type Action = 'reset' | 'demoAction';
+export const actions = {
+  reset: () => {},
+  demoAction: () => {},
+};
+
+export type Actions = keyof typeof actions;
 
 export type FormButton = {
   type: 'button';
   label: string;
   primary?: boolean;
 } & (
-  { submit: true } | { action: Action }
+  { submit: true } | { action: Actions }
 );
 
 export type FieldsType = Radio | Checkbox |

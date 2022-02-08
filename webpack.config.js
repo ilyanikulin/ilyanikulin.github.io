@@ -2,9 +2,6 @@ module.exports = {
   output: {
     filename: "[name].[hash].js"
   },
-  devServer: {
-    overlay: false,
-  },
   module: {
     rules: [
       {
